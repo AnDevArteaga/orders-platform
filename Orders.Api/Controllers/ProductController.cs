@@ -6,16 +6,11 @@ namespace Orders.Api.Controllers;
 
 [ApiController]
 [Route("api/products")]
-public class ProductController : ControllerBase
+public class ProductController(CreateProductUseCase createProduct, UpdateProductStockUseCase updateStock) : ControllerBase
 {
-    private readonly CreateProductUseCase _createProduct;
-    private readonly UpdateProductStockUseCase _updateStock;
+    private readonly CreateProductUseCase _createProduct = createProduct;
+    private readonly UpdateProductStockUseCase _updateStock = updateStock;
 
-    public ProductController(CreateProductUseCase createProduct, UpdateProductStockUseCase updateStock)
-    {
-        _createProduct = createProduct;
-        _updateStock = updateStock;
-    }
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductRequest request)
     {
