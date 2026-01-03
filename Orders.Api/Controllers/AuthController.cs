@@ -18,6 +18,12 @@ public class AuthController(LoginUserUseCase loginUser, RegisterUserUseCase regi
         var token = await _loginUser.ExecuteAsync(request.Email, request.Password);
         return Ok(new { token });
     }
+    [HttpPost("/register")]
+    public async Task<IActionResult> Register(RegisterRequest request)
+    {
+        var userId = await _registerUser.ExecuteAsync(request.Username, request.Email, request.Password);
+        return CreatedAtAction(nameof(Register), new { id = userId });
+    }
 
 }
 
