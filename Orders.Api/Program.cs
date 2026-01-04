@@ -1,8 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Orders.Application.Interfaces.Repositories;
+using Orders.Application.Interfaces.Services;
 using Orders.Application.UsesCases.Products;
+using Orders.Application.UsesCases.Payments;
 using Orders.Infrastructure.Persistence;
 using Orders.Infrastructure.Repositories;
+using Orders.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -36,9 +39,13 @@ builder.Services.AddDbContext<OrdersDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStrings")));
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IPaymentTransactionRepository, PaymentTransactionRepository>();
+
+builder.Services.AddHttpClient<IWompiService, WompiService>();
 
 builder.Services.AddScoped<UpdateProductStockUseCase>();
 builder.Services.AddScoped<CreateProductUseCase>();
+builder.Services.AddScoped<ProcessPaymentUseCase>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
