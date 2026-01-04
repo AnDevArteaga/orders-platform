@@ -7,6 +7,7 @@ public class OrdersDbContext(DbContextOptions<OrdersDbContext> options) : DbCont
 {
     public DbSet<Product> Products => Set<Product>();
     public DbSet<PaymentTransaction> PaymentTransactions => Set<PaymentTransaction>();
+    public DbSet<User> Users => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

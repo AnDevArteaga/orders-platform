@@ -3,6 +3,7 @@ using Orders.Application.Interfaces.Repositories;
 using Orders.Application.Interfaces.Services;
 using Orders.Application.UsesCases.Products;
 using Orders.Application.UsesCases.Payments;
+using Orders.Application.UsesCases.Auth;
 using Orders.Infrastructure.Persistence;
 using Orders.Infrastructure.Repositories;
 using Orders.Infrastructure.Services;
@@ -40,12 +41,17 @@ builder.Services.AddDbContext<OrdersDbContext>(options =>
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IPaymentTransactionRepository, PaymentTransactionRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IJwtService, JwtService>();
 
 builder.Services.AddHttpClient<IWompiService, WompiService>();
 
 builder.Services.AddScoped<UpdateProductStockUseCase>();
 builder.Services.AddScoped<CreateProductUseCase>();
 builder.Services.AddScoped<ProcessPaymentUseCase>();
+builder.Services.AddScoped<LoginUserUseCase>();
+builder.Services.AddScoped<RegisterUserUseCase>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
