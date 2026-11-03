@@ -1,6 +1,23 @@
-@Orders.Api_HostAddress = http://localhost:5143
-
-GET {{Orders.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+@host = http://localhost:5080
 
 ###
+GET {{host}}/health
+
+###
+POST {{host}}/account/register
+Content-Type: application/json
+
+{
+  "name": "Tienda demo",
+  "email": "tienda@example.com",
+  "password": "clave-demo-1"
+}
+
+###
+POST {{host}}/account/login
+Content-Type: application/json
+
+{
+  "email": "tienda@example.com",
+  "password": "clave-demo-1"
+}

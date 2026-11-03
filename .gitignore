@@ -5,3 +5,5 @@ obj/
 *.suo
 appsettings.Development.json
 .env
+orders.db
+orders.db-*
